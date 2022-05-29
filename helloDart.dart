@@ -356,19 +356,95 @@ void optional(String op1,[String? op2]){
 void defaultParam({String defaul = "default", required String? normal} ){
   print("$defaul + $normal");
 }
+//
+// void main(){
+//   // named("sdf","sdf"); // 네임드 파라미터는 이렇게 안됨
+//   named(name1: 'sdf', name2: 'wef');
+//   optional("df");
+//   optional("df","sdf");
+//   defaultParam(defaul: "temp", normal: "노말");
+//   defaultParam(normal: "노말");
+// }
 
-void main(){
-  // named("sdf","sdf"); // 네임드 파라미터는 이렇게 안됨
-  named(name1: 'sdf', name2: 'wef');
-  optional("df");
-  optional("df","sdf");
-  defaultParam(defaul: "temp", normal: "노말");
-  defaultParam(normal: "노말");
+
+// 10. Lexical scope
+
+bool topLevel = true;
+
+// void main() {
+//   var insideMain = true;
+//
+//   // 함수 안에 함수 정의 가능
+//   void myFunction() {
+//     var insideFunction = true;
+//
+//     // 함수 안에 함수 안에 함수 정의
+//     void nestedFunction() {
+//       var insideNestedFunction = true;
+//
+//       assert(topLevel);
+//       assert(insideMain);
+//       assert(insideFunction);
+//       assert(insideNestedFunction);
+//     }
+//     // assert(insideNestedFunction); // 스코프 밖이니 당연히 안됨
+//   }
+// }
+
+// 11. lexical closure
+
+// Function makeAdder(int addBy) {
+//   return (int i) => addBy + i;
+// }
+//
+// void main() {
+//   Function add2 = makeAdder(2); // 함수 자체를 재정의 가능
+//   print(add2(5));
+//
+//   Function add4 = makeAdder(4);
+//   print(add4(7));
+// }
+
+// 12. operator
+
+
+// void main() {
+//   assert(5 / 2 == 2.5); // Result is a double
+//   assert(5 ~/ 2 == 2); // Result is an int
+//   assert(5 % 2 == 1); // Remainder
+//
+//   int a;
+//   int b;
+//
+//   // 12-1 3항 조건식 ??
+//   // ?? : null 이면 ~로 반환
+//   String playerName(String? name) => name ?? 'Guest';
+//   print(playerName(null));
+//
+// }
+
+
+// 13. Cascade notation
+
+// `..` 을 사용하면 하나의 오브젝트에 함수호출, 필드접근을 순차적으로 수행할 수 있다.이 과정 중간에 어떤 값이 반환되더라도 무시된다.
+// 연산자가 아니라 구문
+// 캐스케이드(..)를 사용하면 동일한 개체에 대해 일련의 작업을 수행할 수 있다.
+// 함수 호출 외에 동일한 개체의 필드에도 액세스할 수 있다.
+// 이렇게 하면 임시 변수를 만드는 단계가 절약되고 더 많은 유동 코드를 쓸 수 있다.
+
+class CascadeTest{
+  String? nestField;
+  String? nestField2;
+  CascadeTest(this.nestField, this.nestField2);
 }
 
-
-
-
+void main() {
+  var cascadeTest = CascadeTest("1", "2") // 객체생성
+  ..nestField = '3'
+  ..nestField2 = '4'; // 캐스캐이드로 객체에 바로 접근하여 재정의
+  print(cascadeTest.nestField); // 3
+  print(cascadeTest.nestField2); // 4
+}
 
 
 
